@@ -6,6 +6,8 @@ using System;
 public class PlayerSubject : MonoBehaviour
 {
     public event Action PlayerInput;
+    public event Action LeftInput;
+    public event Action RightInput;
 
     public void InputCount()
     { 
@@ -24,6 +26,16 @@ public class PlayerSubject : MonoBehaviour
         if(Input.GetKey("d") || Input.GetKey("a")) 
         {
             InputCount();
+        }
+
+        if(Input.GetKey("a"))
+        {
+            LeftInput?.Invoke();
+        }
+
+        if(Input.GetKey("d"))
+        {
+            RightInput?.Invoke();
         }
     }
 }

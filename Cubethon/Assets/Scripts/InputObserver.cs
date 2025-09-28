@@ -8,10 +8,22 @@ public class InputObserver : MonoBehaviour
     [SerializeField] private PlayerSubject subjectToObserve;
 
     private int playerInputs = 0;
+    private int leftInputs = 0;
+    private int rightInputs = 0;
 
     private void OnPlayerInput()
     {
         playerInputs++;
+
+    }
+    private void OnLeftInput()
+    {
+        leftInputs++;
+
+    }
+    private void OnRightInput()
+    {
+        rightInputs++;
 
     }
 
@@ -20,6 +32,8 @@ public class InputObserver : MonoBehaviour
         if (subjectToObserve != null) 
         {
             subjectToObserve.PlayerInput += OnPlayerInput;
+            subjectToObserve.LeftInput += OnLeftInput;
+            subjectToObserve.RightInput += OnRightInput;
         }
     }
 
@@ -28,6 +42,8 @@ public class InputObserver : MonoBehaviour
         if (subjectToObserve != null) 
         {
             subjectToObserve.PlayerInput -= OnPlayerInput;
+            subjectToObserve.LeftInput -= OnLeftInput;
+            subjectToObserve.RightInput -= OnRightInput;
         }
     }
 
@@ -36,7 +52,15 @@ public class InputObserver : MonoBehaviour
                 new Rect (50,50,100,200));
            
             GUILayout.BeginHorizontal ("box");
-            GUILayout.Label ("inputs: " + playerInputs);
+            GUILayout.Label ("total: " + playerInputs);
+            GUILayout.EndHorizontal ();
+
+            GUILayout.BeginHorizontal ("box");
+            GUILayout.Label ("left: " + leftInputs);
+            GUILayout.EndHorizontal ();
+
+            GUILayout.BeginHorizontal ("box");
+            GUILayout.Label ("right: " + rightInputs);
             GUILayout.EndHorizontal ();
             
             GUILayout.EndArea ();
